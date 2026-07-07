@@ -53,7 +53,7 @@
 
     <div id="productGrid" class="product-grid">
         @forelse($products as $product)
-            <a href="{{ route('shop.show', $product->slug }}" class="product-card">
+            <a href="{{ route('shop.show', ['slug' => $product->slug]) }}" class="product-card">
                 <img src="{{ optional($product->primaryImage)->path ? asset('storage/' . $product->primaryImage->path) : 'https://via.placeholder.com/400x400' }}" alt="{{ $product->name }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;" loading="lazy">
                 <div style="padding:12px 14px 14px;">
                     <h2 style="font-size:0.95rem;font-weight:600;margin-bottom:2px;">{{ $product->name }}</h2>

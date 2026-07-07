@@ -3,6 +3,7 @@
 @section('content')
     <div class="card" style="max-width:520px;margin:0 auto;">
         <h1>Create Account</h1>
+        <p class="text-muted" style="margin-bottom:16px;">Buyer accounts can register here. If you are the admin, please log in with the admin email instead.</p>
         <form method="POST" action="{{ route('register.post') }}">
             @csrf
             <label>Name</label>

@@ -14,6 +14,9 @@ class CategoryController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:categories,name'],
         ]);
 
+        // Generate slug from name
+        $data['slug'] = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['name'])));
+
         $category = Category::create($data);
 
         return response()->json([

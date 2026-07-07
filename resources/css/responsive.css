@@ -63,6 +63,63 @@
         display: none;
     }
 
+    /* Ensure navbar stays horizontal on ALL pages */
+    header nav {
+        max-width: 100%;
+    }
+
+    /* Admin/Edit Product Form - Mobile Responsive */
+    .card[style*="max-width:700px"] {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 16px !important;
+    }
+
+    .card[style*="max-width:700px"] h1 {
+        font-size: 1.3rem !important;
+    }
+
+    /* Form inputs on mobile */
+    .card[style*="max-width:700px"] .input {
+        font-size: 16px !important;
+        padding: 12px 14px !important;
+    }
+
+    .card[style*="max-width:700px"] label {
+        font-size: 0.85rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .card[style*="max-width:700px"] button {
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Size guide table on mobile */
+    .card[style*="max-width:700px"] table {
+        font-size: 0.75rem !important;
+    }
+
+    .card[style*="max-width:700px"] th,
+    .card[style*="max-width:700px"] td {
+        padding: 6px 4px !important;
+    }
+
+    .card[style*="max-width:700px"] .size-guide-input {
+        padding: 4px 2px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Color quantity rows on mobile */
+    #colorQuantityContainer > div {
+        padding: 10px !important;
+    }
+
+    #colorQuantityContainer input {
+        font-size: 0.9rem !important;
+        padding: 8px 10px !important;
+    }
+
     /* Authentication Cards */
     .card[style*="max-width:520px"] {
         max-width: 100% !important;

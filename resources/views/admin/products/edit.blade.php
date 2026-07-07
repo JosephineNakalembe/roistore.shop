@@ -5,7 +5,7 @@
         <h1>Edit Product</h1>
         <form method="POST" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data" style="display:grid;gap:12px;">
             @csrf
-                        @method('PATCH')
+            @method('PATCH')
             <label>Product ID</label>
             <input class="input" name="product_id_display" value="{{ $product->product_id }}" readonly style="background:#f3f4f6;cursor:not-allowed;">
             <input type="hidden" name="product_id" value="{{ $product->product_id }}">
@@ -213,7 +213,7 @@
         let colorQuantityCount = 0;
 
         const existingColorPrices = @json($product->color_prices ?? []);
-        $existingColorImages = $product->images
+        const existingColorImages = @json($product->images
             ->where('media_type', 'image')
             ->whereNotNull('color')
             ->groupBy('color')
@@ -221,8 +221,8 @@
                 return $imgs->map(function($img) {
                     return ['id' => $img->id, 'url' => asset('storage/' . $img->path)];
                 })->values();
-            });
-        const existingColorImages = @json($existingColorImages);
+            })
+        );
 
         function addColorQuantityRow(color = '', size = '', quantity = '') {
             const container = document.getElementById('colorQuantityContainer');

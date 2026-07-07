@@ -122,9 +122,11 @@
 
     <main class="container">
         @include('partials.alerts')
-        <div style="margin-bottom:18px;">
-            <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
-        </div>
+        @unless(request()->routeIs('welcome'))
+            <div style="margin-bottom:18px;">
+                <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
+            </div>
+        @endunless
         @yield('content')
     </main>
 

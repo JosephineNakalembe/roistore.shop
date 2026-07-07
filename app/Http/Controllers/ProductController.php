@@ -78,7 +78,7 @@ class ProductController extends Controller
                 ->get();
         }
 
-        return view('shop.index', compact('products', 'categories', 'search', 'categorySlug', 'suggestedCategories'));
+        return view('welcome', compact('products', 'categories', 'search', 'categorySlug', 'suggestedCategories'));
     }
 
     public function show($slug)

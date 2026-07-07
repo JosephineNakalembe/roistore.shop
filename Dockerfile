@@ -16,13 +16,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY composer.json composer.lock ./
+COPY . .
+
 RUN composer install --no-interaction --no-progress --prefer-dist --no-dev --optimize-autoloader
 
-COPY package.json ./
 RUN npm install
-
-COPY . .
 
 RUN chmod -R 775 storage bootstrap/cache \
     && php artisan key:generate --force || true \

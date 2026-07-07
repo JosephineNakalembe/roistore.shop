@@ -23,6 +23,7 @@ RUN composer install --no-interaction --no-progress --prefer-dist --no-dev --opt
 RUN npm install
 
 RUN chmod -R 775 storage bootstrap/cache \
+    && rm -rf public/storage \
     && php artisan key:generate --force || true \
     && php artisan config:clear \
     && php artisan optimize:clear \

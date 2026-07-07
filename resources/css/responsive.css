@@ -174,34 +174,9 @@
         font-size: 0.85rem;
     }
 
-    /* Welcome/Shop Page Header */
-    .shop-header {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 14px;
-    }
-
-    .shop-title {
-        font-size: 1.3rem !important;
-        font-weight: 700;
-        margin: 0 !important;
-    }
-
-    /* Categories Container */
-    .categories-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 14px;
-        align-items: center;
-    }
-
-    .categories-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 14px;
+    /* Shop Page Header - Compact Layout */
+    h1[style*="margin-bottom:0"] {
+        font-size: 1.2rem !important;
     }
 
     /* Search & Filter Form - Compact horizontal layout */

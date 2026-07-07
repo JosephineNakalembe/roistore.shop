@@ -359,7 +359,7 @@ class ProductController extends Controller
     private function generateNextProductId(): string
     {
         $lastProduct = Product::where('product_id', 'like', 'ER%')
-            ->orderByRaw("CAST(SUBSTRING(product_id, 3) AS UNSIGNED) DESC")
+            ->orderByRaw("CAST(SUBSTRING(product_id, 3) AS INTEGER) DESC")
             ->first();
 
         if ($lastProduct) {

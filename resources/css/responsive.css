@@ -1,26 +1,73 @@
-/* ============================================
+ /* ============================================
    RESPONSIVE STYLES - Mobile First Approach
    ============================================ */
 
 /* Base styles are already in app.blade.php */
 
-/* Mobile Devices (up to 640px) */
+/* Mobile Devices (up to 640px) - Shein-style compact layout */
 @media (max-width: 640px) {
     /* Container adjustments */
     .container {
-        padding: 12px 16px;
+        padding: 10px 12px;
     }
 
-    /* Header & Navigation */
+    /* Header & Navigation - Keep horizontal */
     header .container {
-        padding: 12px 16px;
+        padding: 10px 12px;
+    }
+
+    header > div:first-child {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    header a[href="{{ url('/') }}"] {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    /* Navbar - Keep in one horizontal line */
+    nav {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav a, nav .nav-link {
+        width: auto;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    nav form button {
+        width: auto;
+        text-align: center;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Tagline - Hide on mobile to save space */
+    div[style*="margin-top:6px"] {
+        display: none;
     }
 
     /* Authentication Cards */
     .card[style*="max-width:520px"] {
         max-width: 100% !important;
-        margin: 0 8px !important;
-        padding: 20px 16px !important;
+        margin: 0 !important;
+        padding: 16px !important;
     }
 
     .card[style*="max-width:520px"] h1 {
@@ -28,55 +75,23 @@
     }
 
     .card[style*="max-width:520px"] label {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         margin-bottom: 4px;
     }
 
     .card[style*="max-width:520px"] input {
-        font-size: 16px !important; /* Prevents zoom on iOS */
-        padding: 14px 16px !important;
+        font-size: 16px !important;
+        padding: 12px 14px !important;
     }
 
     .card[style*="max-width:520px"] button[type="submit"] {
         width: 100%;
         justify-content: center;
-        padding: 14px 20px;
+        padding: 12px 16px;
     }
 
     .card[style*="max-width:520px"] p {
-        font-size: 0.9rem !important;
-    }
-
-    header > div:first-child {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    header a[href="{{ url('/') }}"] {
-        font-size: 1.2rem;
-    }
-
-    /* Mobile Navigation Menu */
-    nav {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-    }
-
-    nav a, nav .nav-link {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 12px 16px;
-        font-size: 0.95rem;
-    }
-
-    nav form button {
-        width: 100%;
-        text-align: left;
-        padding: 12px 16px;
-        font-size: 0.95rem;
+        font-size: 0.85rem !important;
     }
 
     /* Hide floating elements on very small screens or adjust position */
@@ -97,39 +112,80 @@
         font-size: 0.85rem;
     }
 
-    /* Product Grid - Shop Page */
-    #productGrid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
-        gap: 12px !important;
+    /* Shop Page Header - Compact Layout */
+    h1[style*="margin-bottom:0"] {
+        font-size: 1.2rem !important;
     }
 
-    /* Product Cards */
-    .product-card h2, .product-card h3 {
-        font-size: 0.9rem !important;
-    }
-
-    .product-card p {
-        font-size: 0.85rem !important;
-    }
-
-    /* Search & Filter Form */
+    /* Search & Filter Form - Compact horizontal layout */
     form[method="GET"][action*="shop.index"] {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    form[method="GET"][action*="shop.index"] input,
-    form[method="GET"][action*="shop.index"] select {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
         width: 100% !important;
     }
 
-    form[method="GET"][action*="shop.index"] button {
-        width: 100%;
+    form[method="GET"][action*="shop.index"] input[type="search"] {
+        flex: 1 !important;
+        min-width: 0 !important;
+        width: auto !important;
+        padding: 8px 10px !important;
+        font-size: 0.9rem !important;
     }
 
-    /* Category Pills */
+    form[method="GET"][action*="shop.index"] select {
+        width: auto !important;
+        min-width: 120px !important;
+        padding: 8px 10px !important;
+        font-size: 0.85rem !important;
+    }
+
+    form[method="GET"][action*="shop.index"] button {
+        width: auto !important;
+        padding: 8px 14px !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap;
+    }
+
+    /* Category Pills - Compact */
     div[style*="flex-wrap:wrap"][style*="gap:6px"] {
-        gap: 8px;
+        gap: 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    div[style*="flex-wrap:wrap"][style*="gap:6px"] a,
+    div[style*="flex-wrap:wrap"][style*="gap:6px"] button {
+        padding: 5px 12px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Product Grid - 2 columns on mobile */
+    #productGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    /* Product Cards - Compact */
+    .product-card {
+        border-radius: 10px !important;
+    }
+
+    .product-card h2, .product-card h3 {
+        font-size: 0.85rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .product-card p {
+        font-size: 0.8rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .product-card > div {
+        padding: 10px !important;
+    }
+
+    .product-card img {
+        aspect-ratio: 1/1 !important;
     }
 
     /* Product Detail Page */

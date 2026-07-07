@@ -57,9 +57,9 @@
 </head>
 <body>
     <header class="container" style="margin-bottom:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
-            <a href="{{ url('/') }}" style="font-size:1.4rem;font-weight:700;color:#111;text-decoration:none;">ROI Store</a>
-            <nav style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <div class="header-top">
+            <a href="{{ url('/') }}" class="logo">ROI Store</a>
+            <nav class="navbar">
                 @auth
                     @unless(auth()->user()->isAdmin())
                         @php

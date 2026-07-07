@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-        <h1 style="margin-bottom:0;">Shop</h1>
-        <form method="GET" action="{{ route('shop.index') }}" style="display:flex;gap:8px;flex-wrap:wrap;">
-            <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search" style="width:160px;padding:8px 12px;">
-            <select class="input" name="category" style="width:auto;padding:8px 12px;">
+    <div class="shop-header">
+        <h1 class="shop-title">Shop</h1>
+        <form method="GET" action="{{ route('shop.index') }}" class="shop-filter-bar">
+            <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search products...">
+            <select class="input" name="category">
                 <option value="">All categories</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->slug }}"{{ $categorySlug === $category->slug ? ' selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
             </select>
-            <button class="btn" type="submit" style="padding:8px 16px;">Filter</button>
+            <button class="btn" type="submit">Filter</button>
         </form>
     </div>
 
@@ -51,9 +51,9 @@
         </div>
     @endif
 
-    <div id="productGrid" style="display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">
+    <div id="productGrid" class="product-grid">
         @forelse($products as $product)
-            <a href="{{ route('shop.show', $product->slug) }}" class="product-card" style="display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e9ecef;border-radius:14px;overflow:hidden;cursor:pointer;transition:box-shadow 0.2s, transform 0.2s;" onmouseover="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)';this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow='';this.style.transform='';">
+            <a href="{{ route('shop.show', $product->slug }}" class="product-card">
                 <img src="{{ optional($product->primaryImage)->path ? asset('storage/' . $product->primaryImage->path) : 'https://via.placeholder.com/400x400' }}" alt="{{ $product->name }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;" loading="lazy">
                 <div style="padding:12px 14px 14px;">
                     <h2 style="font-size:0.95rem;font-weight:600;margin-bottom:2px;">{{ $product->name }}</h2>

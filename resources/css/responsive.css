@@ -16,56 +16,61 @@
         padding: 10px 12px;
     }
 
-    header > div:first-child {
-        flex-direction: row;
-        align-items: center;
+    /* Header top section - logo and navbar on same line */
+    .header-top {
+        display: flex;
         justify-content: space-between;
+        align-items: center;
         gap: 8px;
+        flex-wrap: nowrap !important;
     }
 
-    header a[href="{{ url('/') }}"] {
-        font-size: 1.1rem;
+    /* Logo - keep visible and compact */
+    .logo {
+        font-size: 1.1rem !important;
         font-weight: 700;
+        flex-shrink: 0;
+        color: #111;
+        text-decoration: none;
     }
 
     /* Navbar - Keep in one horizontal line */
-    nav {
-        width: auto;
+    .navbar {
+        display: flex;
         flex-direction: row;
         align-items: center;
         gap: 4px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        flex-shrink: 0;
+        max-width: 100%;
     }
 
-    nav::-webkit-scrollbar {
+    .navbar::-webkit-scrollbar {
         display: none;
     }
 
-    nav a, nav .nav-link {
+    .navbar .nav-link {
         width: auto;
         justify-content: center;
         padding: 8px 12px;
         font-size: 0.85rem;
         white-space: nowrap;
+        flex-shrink: 0;
     }
 
-    nav form button {
+    .navbar form button {
         width: auto;
         text-align: center;
         padding: 8px 12px;
         font-size: 0.85rem;
+        flex-shrink: 0;
     }
 
     /* Tagline - Hide on mobile to save space */
     div[style*="margin-top:6px"] {
         display: none;
-    }
-
-    /* Ensure navbar stays horizontal on ALL pages */
-    header nav {
-        max-width: 100%;
     }
 
     /* Admin/Edit Product Form - Mobile Responsive */
@@ -216,15 +221,65 @@
         font-size: 0.8rem !important;
     }
 
+    /* Shop Filter Bar - Horizontal on mobile */
+    .shop-filter-bar {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .shop-filter-bar input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .shop-filter-bar select {
+        width: auto;
+        min-width: 100px;
+    }
+
+    .shop-filter-bar button {
+        width: auto;
+        white-space: nowrap;
+    }
+
     /* Product Grid - 2 columns on mobile */
-    #productGrid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     /* Product Cards - Compact */
     .product-card {
-        border-radius: 10px !important;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .product-card img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+
+    .product-card > div {
+        padding: 10px;
+    }
+
+    .product-card h2, .product-card h3 {
+        font-size: 0.85rem;
+        margin-bottom: 2px;
+    }
+
+    .product-card p {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
     }
 
     .product-card h2, .product-card h3 {
@@ -245,11 +300,30 @@
         aspect-ratio: 1/1 !important;
     }
 
-    /* Product Detail Page */
-    .card > div[style*="grid-template-columns: 1.1fr 0.9fr"],
-    .card > div[style*="grid-template-columns: 1.2fr 0.8fr"] {
+    /* Product Detail Page - Stack on mobile */
+    .product-details-layout {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+    }
+
+    .product-details-layout {
         grid-template-columns: 1fr !important;
         gap: 16px !important;
+    }
+
+    .product-image-section {
+        width: 100%;
+    }
+
+    .product-info-section {
+        width: 100%;
+    }
+
+    /* Product Grid - 2 columns on mobile */
+    #productGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
     }
 
     /* Slideshow arrows */

@@ -45,10 +45,10 @@
         }
     @endphp
 
-    <div style="display:flex;flex-direction:column;gap:20px;">
+    <div class="product-detail-container">
         <div class="card">
-            <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:24px;align-items:start;">
-                <div>
+            <div class="product-details-layout">
+                <div class="product-image-section">
                     <!-- Product Media Slideshow -->
                     @if($allMedia->count() > 0)
                         <div style="position:relative;">
@@ -65,7 +65,7 @@
                         <img src="https://via.placeholder.com/720x720" alt="{{ $product->name }}" class="product-image">
                     @endif
                 </div>
-                <div>
+                <div class="product-info-section">
                     <h1>{{ $product->name }}</h1>
                     <p class="text-muted">{{ $product->category?->name ?? 'Uncategorized' }}</p>
                     <p id="productPrice" style="font-size:1.6rem;font-weight:700;">UGX{{ number_format($product->priceForColor($defaultColor), 0) }}</p>

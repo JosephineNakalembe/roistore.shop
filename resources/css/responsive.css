@@ -47,6 +47,8 @@
         scrollbar-width: none;
         flex-shrink: 0;
         max-width: 100%;
+        justify-content: space-between;
+        flex-wrap: nowrap;
     }
 
     .navbar::-webkit-scrollbar {
@@ -62,6 +64,9 @@
         flex-shrink: 0;
         border-radius: 4px;
         line-height: 1.2;
+        min-width: 0;
+        flex: 1;
+        text-align: center;
     }
 
     .navbar form button {
@@ -122,7 +127,7 @@
         min-height: 44px;
     }
 
-    /* Product Grid - 2 columns */
+    /* Product Grid - 2 columns on mobile */
     #productGrid,
     .product-grid {
         grid-template-columns: repeat(2, 1fr) !important;

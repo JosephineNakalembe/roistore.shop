@@ -14,7 +14,7 @@
             <label>Confirm Password</label>
             <input class="input" type="password" name="password_confirmation" required>
             <button class="btn" type="submit" style="margin-top:16px;">Register</button>
-            <p class="text-muted" style="margin-top:12px;">Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
+            <p class="text-muted" style="margin-top:12px;">Already have an account? <a href="{{ route('login') }}" style="font-weight:700;color:#1a1a2e;">Sign in</a></p>
         </form>
     </div>
 @endsection

@@ -56,13 +56,17 @@
                                 </div>
                                 <p class="text-muted" style="font-size:0.85rem;margin:2px 0 0;">UGX{{ number_format($item['unit_price'] ?? $item['product']->price, 0) }} each</p>
                                 @if($item['color'] || $item['size'])
-                                    <p style="font-size:0.85rem;color:#6b7280;margin:2px 0 0;">
-                                        @if($item['color'])<span>Color: {{ $item['color'] }}</span>@endif
-                                        @if($item['size'])<span> | Size: {{ $item['size'] }}</span>@endif
-                                    </p>
+                                    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 0;">
+                                        @if($item['color'])
+                                            <div style="width:24px;height:24px;border-radius:4px;background:{{ $item['color'] }};border:1px solid #d1d5db;flex-shrink:0;" title="{{ $item['color'] }}"></div>
+                                        @endif
+                                        @if($item['size'])<span style="font-size:0.85rem;color:#6b7280;">Size: {{ $item['size'] }}</span>@endif
+                                    </div>
                                 @endif
-                                <p style="font-size:0.85rem;color:#6b7280;margin:4px 0 0;">Qty: {{ $item['quantity'] }} <span style="color:#9ca3af;font-size:0.75rem;">(click to edit)</span></p>
+                                <p style="font-size:0.85rem;color:#6b7280;margin:4px 0 0;">Qty: {{ $item['quantity'] }}</p>
                             </div>
+                            <!-- Edit Button -->
+                            <button onclick="openEditModal('{{ $item['product']->id }}', '{{ $item['color'] ?? '' }}', '{{ $item['size'] ?? '' }}')" style="flex-shrink:0;padding:6px 14px;font-size:0.85rem;font-weight:600;color:#dc2626;background:#fff;border:2px solid #dc2626;border-radius:8px;cursor:pointer;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.background='#dc2626';this.style.color='#fff';" onmouseout="this.style.background='#fff';this.style.color='#dc2626';">Edit</button>
                             <!-- Remove Button -->
                             <form method="POST" action="{{ route('cart.remove', $item['product']) }}" style="flex-shrink:0;">
                                 @csrf

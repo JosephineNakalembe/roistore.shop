@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="shop-header">
-        <h1 class="shop-title">Shop</h1>
-        <form method="GET" action="{{ route('shop.index') }}" class="shop-filter-bar">
-            <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search products...">
-            <select class="input" name="category">
-                <option value="">All categories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->slug }}"{{ $categorySlug === $category->slug ? ' selected' : '' }}>{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <button class="btn" type="submit">Filter</button>
-        </form>
-    </div>
+    <div class="card" style="max-width:1200px;margin:0 auto;">
+        <div class="shop-header">
+            <h1 class="shop-title" style="font-size:1.3rem;margin-bottom:12px;">Shop</h1>
+            <form method="GET" action="{{ route('shop.index') }}" class="shop-filter-bar" style="display:flex;flex-wrap:wrap;gap:10px;">
+                <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search products..." style="flex:1;min-width:180px;">
+                <select class="input" name="category" style="min-width:160px;">
+                    <option value="">All categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->slug }}"{{ $categorySlug === $category->slug ? ' selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <button class="btn" type="submit" style="padding:8px 18px;font-size:0.9rem;">Filter</button>
+            </form>
+        </div>
 
     @php
         $defaults = ['women-s-clothing' => 'Women\'s Clothing', 'men-s-clothing' => 'Men\'s Clothing', 'kids-baby' => 'Kids & Baby', 'electronics-gadgets' => 'Electronics', 'beauty-personal-care' => 'Beauty'];

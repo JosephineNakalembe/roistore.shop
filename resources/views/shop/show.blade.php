@@ -334,15 +334,15 @@
 
         <!-- Suggested Products -->
         @if($suggestedProducts->isNotEmpty())
-            <div style="margin-top:32px;">
-                <h2>You may also like</h2>
+            <div style="margin-top:24px;padding-top:20px;border-top:1px solid #e9ecef;">
+                <h2 style="font-size:1.1rem;margin-bottom:14px;">You may also like</h2>
                 <div class="grid-3">
                     @foreach($suggestedProducts as $sProduct)
                         <a href="{{ route('shop.show', $sProduct->slug) }}" class="product-card" style="display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e9ecef;border-radius:14px;overflow:hidden;cursor:pointer;transition:box-shadow 0.2s, transform 0.2s;" onmouseover="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)';this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow='';this.style.transform='';">
                             <img src="{{ optional($sProduct->primaryImage)->path ? asset('storage/' . $sProduct->primaryImage->path) : 'https://via.placeholder.com/400x400' }}" alt="{{ $sProduct->name }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;" loading="lazy">
-                            <div style="padding:12px 14px 14px;">
-                                <h3 style="font-size:0.95rem;font-weight:600;margin-bottom:2px;">{{ $sProduct->name }}</h3>
-                                <p style="font-weight:700;font-size:1rem;">UGX{{ number_format($sProduct->price, 0) }}</p>
+                            <div style="padding:10px 12px 12px;">
+                                <h3 style="font-size:0.9rem;font-weight:600;margin-bottom:2px;">{{ $sProduct->name }}</h3>
+                                <p style="font-weight:700;font-size:0.95rem;">UGX{{ number_format($sProduct->price, 0) }}</p>
                             </div>
                         </a>
                     @endforeach

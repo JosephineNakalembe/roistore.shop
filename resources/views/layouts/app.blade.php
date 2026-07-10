@@ -86,7 +86,7 @@
     </style>
 </head>
 <body>
-    <header class="container" style="margin-bottom:16px;">
+    <header class="container" style="margin-bottom:12px;">
         <div class="header-top">
             <a href="{{ url('/') }}" class="logo">ROI Store</a>
             <nav class="navbar">
@@ -103,31 +103,26 @@
                         <a class="nav-link" href="{{ route('cart.index') }}">
                             Cart
                             @if($cartCount > 0)
-                                <sup class="badge-red" style="margin-left:4px;">{{ $cartCount }}</sup>
+                                <sup class="badge-red" style="margin-left:3px;">{{ $cartCount }}</sup>
                             @endif
                         </a>
                         <a class="nav-link" href="{{ route('orders.index') }}">
                             Orders
                             @if($activeOrdersCount > 0)
-                                <sup class="badge-orange" style="margin-left:4px;">{{ $activeOrdersCount }}</sup>
+                                <sup class="badge-orange" style="margin-left:3px;">{{ $activeOrdersCount }}</sup>
                             @endif
                         </a>
                         <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlist</a>
                         <a class="nav-link" href="{{ route('dashboard') }}">Account</a>
                         <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                             @csrf
-                            <button type="submit" class="nav-link" style="background:none;border:none;color:#1a1a2e;cursor:pointer;padding:6px 12px;">Logout</button>
+                            <button type="submit" class="nav-link" style="background:none;border:none;color:#1a1a2e;cursor:pointer;padding:4px 10px;">Logout</button>
                         </form>
-                        @if($unreadMessagesCount > 0)
-                            <a href="{{ route('customer-service.index') }}" class="unread-help-badge btn" style="background:#dc2626;padding:8px 14px;border-radius:50px;font-weight:600;text-decoration:none;font-size:0.8rem;">
-                                🔔 {{ $unreadMessagesCount }}
-                            </a>
-                        @endif
                     @else
                         <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin</a>
                         <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                             @csrf
-                            <button type="submit" class="nav-link" style="background:none;border:none;color:#1a1a2e;cursor:pointer;padding:6px 12px;">Logout</button>
+                            <button type="submit" class="nav-link" style="background:none;border:none;color:#1a1a2e;cursor:pointer;padding:4px 10px;">Logout</button>
                         </form>
                     @endunless
                 @else
@@ -141,9 +136,6 @@
 
     <main class="container">
         @include('partials.alerts')
-        <div style="margin-bottom:18px;">
-            <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
-        </div>
         @yield('content')
     </main>
 

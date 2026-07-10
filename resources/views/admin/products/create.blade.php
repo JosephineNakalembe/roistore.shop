@@ -3,6 +3,10 @@
 @section('content')
     <div class="card" style="max-width:700px;margin:0 auto;">
         <h1>Add Product</h1>
+        
+        <!-- Pickr Color Picker CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
         <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data" style="display:grid;gap:12px;">
             @csrf
                         <label>Product ID <span class="text-muted" style="font-weight:400;font-size:0.85rem;">— Auto-generated</span></label>
@@ -233,9 +237,16 @@
             row.style.background = '#fafafa';
 
             row.innerHTML = `
-                <div style="display:grid;grid-template-columns:repeat(2, 1fr) 80px auto;gap:8px;align-items:center;">
-                    <input type="text" class="input" name="color_${index}" placeholder="Color (e.g., Red)" style="padding:6px;font-size:0.9rem;">
-                    <input type="text" class="input" name="size_${index}" placeholder="Size (e.g., S, M, L, XL, 42)" style="padding:6px;font-size:0.9rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr 80px auto;gap:8px;align-items:center;">
+                    <div>
+                        <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:4px;">Color</label>
+                        <button type="button" class="color-picker-btn" data-index="${index}" style="width:100%;padding:8px;border:2px solid #d1d5db;border-radius:8px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:0.9rem;">
+                            <span class="color-preview" style="width:24px;height:24px;border-radius:4px;background:#ccc;display:inline-block;border:1px solid #e5e7eb;"></span>
+                            <span class="color-text">Select color</span>
+                        </button>
+                        <input type="hidden" name="color_${index}" class="color-input" value="">
+                    </div>
+                    <input type="text" class="input" name="size_${index}" placeholder="Size (e.g., S, M, L)" style="padding:6px;font-size:0.9rem;">
                     <input type="number" class="input" name="quantity_${index}" placeholder="Qty" min="1" style="padding:6px;font-size:0.9rem;">
                     <button type="button" class="btn btn-secondary" onclick="this.closest('div[style*=border]').remove(); updateColors();" style="padding:4px 8px;font-size:0.85rem;">Remove</button>
                 </div>
@@ -250,6 +261,55 @@
                 </div>
             `;
             container.appendChild(row);
+
+            // Initialize Pickr for this row
+            const pickrBtn = row.querySelector('.color-picker-btn');
+            const colorInput = row.querySelector('.color-input');
+            const colorPreview = row.querySelector('.color-preview');
+            const colorText = row.querySelector('.color-text');
+
+            const pickr = Pickr.create({
+                el: pickrBtn,
+                theme: 'classic',
+                default: '#000000',
+                swatches: [
+                    '#000000', '#434343', '#666666', '#999999', '#cccccc', '#ffffff',
+                    '#ff0000', '#ff4400', '#ff8800', '#ffbb00', '#ffee00', '#aaff00',
+                    '#00ff00', '#00ffaa', '#00ffff', '#00aaff', '#0066ff', '#0000ff',
+                    '#4400ff', '#aa00ff', '#ff00ff', '#ff0088', '#ff4444', '#884400',
+                    '#008800', '#004488', '#880088', '#888800', '#008888', '#888888',
+                ],
+                components: {
+                    preview: true,
+                    opacity: false,
+                    hue: true,
+                    interaction: {
+                        hex: true,
+                        rgba: false,
+                        hsla: false,
+                        hsva: false,
+                        cmyk: false,
+                        input: true,
+                        clear: false,
+                        save: true
+                    }
+                }
+            });
+
+            pickr.on('save', (color) => {
+                const hexColor = color.toHEXA().toString();
+                colorInput.value = hexColor;
+                colorPreview.style.background = hexColor;
+                colorText.textContent = hexColor;
+                updateColors();
+                pickr.hide();
+            });
+
+            pickr.on('show', () => {
+                if (colorInput.value) {
+                    pickr.setColor(colorInput.value);
+                }
+            });
         }
 
         function previewColorImages(event, index) {

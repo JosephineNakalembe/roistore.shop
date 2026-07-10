@@ -92,9 +92,9 @@
                                                     class="color-pill"
                                                     data-color="{{ $color }}"
                                                     onclick="selectColor('{{ addslashes($color) }}')"
-                                                    style="cursor:pointer;border:3px solid #d1d5db;background:#fff;color:#111;border-radius:50%;width:40px;height:40px;padding:0;font-size:0;font-weight:600;white-space:nowrap;transition:all 0.15s;box-shadow:0 2px 4px rgba(0,0,0,0.1);"
+                                                    style="cursor:pointer;border:3px solid #d1d5db;background:#fff;color:#111;border-radius:8px;width:44px;height:44px;padding:0;font-size:0;font-weight:600;white-space:nowrap;transition:all 0.15s;box-shadow:0 2px 4px rgba(0,0,0,0.1);"
                                                     title="{{ $color }}">
-                                                    <span style="display:block;width:100%;height:100%;border-radius:50%;background:{{ $color }};"></span>
+                                                    <span style="display:block;width:100%;height:100%;border-radius:6px;background:{{ $color }};"></span>
                                                 </button>
                                             @endforeach
                                         </div>
@@ -466,8 +466,8 @@
             document.querySelectorAll('.color-pill').forEach(btn => {
                 if (btn.dataset.color === color) {
                     btn.style.borderColor = '#1a1a2e';
-                    btn.style.transform = 'scale(1.15)';
-                    btn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                    btn.style.transform = 'scale(1.1)';
+                    btn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.25)';
                 } else {
                     btn.style.borderColor = '#d1d5db';
                     btn.style.transform = 'scale(1)';

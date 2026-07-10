@@ -1,18 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card" style="max-width:1200px;margin:0 auto;">
-        <div class="shop-header">
-            <h1 class="shop-title" style="font-size:1.3rem;margin-bottom:12px;">Shop</h1>
-            <form method="GET" action="{{ route('shop.index') }}" class="shop-filter-bar" style="display:flex;flex-wrap:wrap;gap:10px;">
-                <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search products..." style="flex:1;min-width:180px;">
-                <select class="input" name="category" style="min-width:160px;">
-                    <option value="">All categories</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->slug }}"{{ $categorySlug === $category->slug ? ' selected' : '' }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                <button class="btn" type="submit" style="padding:8px 18px;font-size:0.9rem;">Filter</button>
+    <div class="card" style="max-width:1200px;margin:0 auto;padding:12px;">
+        <!-- Shop Header with Search -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <h1 class="shop-title" style="font-size:1.2rem;font-weight:700;margin:0;flex-shrink:0;">Shop</h1>
+            <form method="GET" action="{{ route('shop.index') }}" style="flex:1;min-width:0;">
+                <input class="input" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Search products..." style="width:100%;padding:8px 12px;font-size:0.9rem;">
             </form>
         </div>
 
@@ -22,31 +16,32 @@
         $hasMore = $otherCategories->isNotEmpty();
     @endphp
 
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center;">
-        <a href="{{ route('shop.index', array_filter(['search' => $search ?? null])) }}" class="btn btn-secondary" style="padding:5px 12px;border-radius:999px;font-size:0.8rem;{{ !$categorySlug ? 'opacity:1;' : '' }}">All</a>
+    <!-- Categories in one line -->
+    <div style="display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;align-items:center;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+        <a href="{{ route('shop.index', array_filter(['search' => $search ?? null])) }}" class="btn btn-secondary" style="padding:4px 12px;border-radius:999px;font-size:0.8rem;flex-shrink:0;{{ !$categorySlug ? 'opacity:1;' : '' }}">All</a>
         @foreach($defaults as $slug => $label)
-            <a href="{{ route('shop.index', array_merge(request()->query(), ['category' => $slug])) }}" style="padding:5px 12px;border-radius:999px;font-size:0.8rem;text-decoration:none;font-weight:500;{{ $categorySlug === $slug ? 'background:#1a1a2e;color:#fff;' : 'background:#f1f3f5;color:#1a1a2e;' }}transition:all 0.2s;">{{ $label }}</a>
+            <a href="{{ route('shop.index', array_merge(request()->query(), ['category' => $slug])) }}" style="padding:4px 12px;border-radius:999px;font-size:0.8rem;text-decoration:none;font-weight:500;flex-shrink:0;{{ $categorySlug === $slug ? 'background:#1a1a2e;color:#fff;' : 'background:#f1f3f5;color:#1a1a2e;' }}transition:all 0.2s;">{{ $label }}</a>
         @endforeach
         @if($hasMore)
-            <button onclick="toggleCategories()" id="catToggle" style="padding:5px 12px;border-radius:999px;font-size:0.8rem;border:none;background:#f1f3f5;color:#1a1a2e;cursor:pointer;font-weight:500;">+{{ $otherCategories->count() }} more</button>
+            <button onclick="toggleCategories()" id="catToggle" style="padding:4px 12px;border-radius:999px;font-size:0.8rem;border:none;background:#f1f3f5;color:#1a1a2e;cursor:pointer;font-weight:500;flex-shrink:0;">+{{ $otherCategories->count() }} more</button>
         @endif
     </div>
 
     @if($hasMore)
     <div id="extraCategories" style="display:none;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
         @foreach($otherCategories as $category)
-            <a href="{{ route('shop.index', array_merge(request()->query(), ['category' => $category->slug])) }}" style="padding:5px 12px;border-radius:999px;font-size:0.8rem;text-decoration:none;font-weight:500;{{ $categorySlug === $category->slug ? 'background:#1a1a2e;color:#fff;' : 'background:#f1f3f5;color:#1a1a2e;' }}transition:all 0.2s;">{{ $category->name }}</a>
+            <a href="{{ route('shop.index', array_merge(request()->query(), ['category' => $category->slug])) }}" style="padding:4px 12px;border-radius:999px;font-size:0.8rem;text-decoration:none;font-weight:500;{{ $categorySlug === $category->slug ? 'background:#1a1a2e;color:#fff;' : 'background:#f1f3f5;color:#1a1a2e;' }}transition:all 0.2s;">{{ $category->name }}</a>
         @endforeach
     </div>
     @endif
 
     <!-- Frequently Searched / Suggested Categories -->
     @if($suggestedCategories->isNotEmpty() && !$search && !$categorySlug)
-        <div style="margin-bottom:16px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;">
-            <p style="font-size:0.8rem;font-weight:600;color:#166534;margin:0 0 6px 0;">🔥 Popular</p>
+        <div style="margin-bottom:12px;padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">
+            <p style="font-size:0.75rem;font-weight:600;color:#166534;margin:0 0 4px 0;">🔥 Popular</p>
             <div style="display:flex;flex-wrap:wrap;gap:4px;">
                 @foreach($suggestedCategories as $sCat)
-                    <a href="{{ route('shop.index', ['category' => $sCat->slug]) }}" style="padding:3px 10px;border-radius:999px;font-size:0.75rem;text-decoration:none;background:#dcfce7;color:#166534;font-weight:500;">{{ $sCat->name }}</a>
+                    <a href="{{ route('shop.index', ['category' => $sCat->slug]) }}" style="padding:2px 8px;border-radius:999px;font-size:0.7rem;text-decoration:none;background:#dcfce7;color:#166534;font-weight:500;">{{ $sCat->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -56,14 +51,14 @@
         @forelse($products as $product)
             <a href="{{ route('shop.show', ['slug' => $product->slug]) }}" class="product-card">
                 <img src="{{ optional($product->primaryImage)->path ? asset('storage/' . $product->primaryImage->path) : 'https://via.placeholder.com/400x400' }}" alt="{{ $product->name }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;" loading="lazy">
-                <div style="padding:12px 14px 14px;">
-                    <h2 style="font-size:0.95rem;font-weight:600;margin-bottom:2px;">{{ $product->name }}</h2>
-                    <p style="font-size:0.8rem;color:#6c757d;margin-bottom:4px;">{{ $product->category?->name ?? 'Uncategorized' }}</p>
-                    <p style="font-weight:700;font-size:1rem;">UGX{{ number_format($product->price, 0) }}</p>
+                <div style="padding:8px 10px 10px;">
+                    <h2 style="font-size:0.85rem;font-weight:600;margin-bottom:2px;">{{ $product->name }}</h2>
+                    <p style="font-size:0.75rem;color:#6c757d;margin-bottom:2px;">{{ $product->category?->name ?? 'Uncategorized' }}</p>
+                    <p style="font-weight:700;font-size:0.95rem;">UGX{{ number_format($product->price, 0) }}</p>
                     @if($product->stock <= 0)
                         <span class="badge badge-red">Out of Stock</span>
                     @elseif($product->stock <= 2)
-                        <span style="font-size:0.75rem;color:#c62828;">Only {{ $product->stock }} left</span>
+                        <span style="font-size:0.7rem;color:#c62828;">Only {{ $product->stock }} left</span>
                     @endif
                 </div>
             </a>

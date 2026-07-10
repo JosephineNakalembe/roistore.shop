@@ -39,16 +39,15 @@
     /* Navbar - horizontal scroll, extremely compact on mobile */
     .navbar {
         display: flex;
-        flex-direction: row;
         align-items: center;
-        gap: 1px;
+        justify-content: space-between; /* spread evenly */
+        gap: 6px;
+        flex-wrap: nowrap;              /* keep one line */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         flex-shrink: 0;
         max-width: 100%;
-        justify-content: space-between;
-        flex-wrap: nowrap;
     }
 
     .navbar::-webkit-scrollbar {
@@ -56,17 +55,15 @@
     }
 
     .navbar .nav-link {
-        width: auto;
+        flex: 1;                        /* each link shares space */
+        text-align: center;             /* center text */
+        min-width: 0;                   /* allow shrinking */
         justify-content: center;
         padding: 3px 5px;
         font-size: 0.65rem;
         white-space: nowrap;
-        flex-shrink: 0;
         border-radius: 4px;
         line-height: 1.2;
-        min-width: 0;
-        flex: 1;
-        text-align: center;
     }
 
     .navbar form button {
@@ -127,11 +124,11 @@
         min-height: 44px;
     }
 
-    /* Product Grid - 2 columns on mobile */
+    /* Product Grid - 1 column (single row per product) on mobile */
     #productGrid,
     .product-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
     }
 
     /* Product Cards - compact */

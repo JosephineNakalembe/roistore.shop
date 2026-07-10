@@ -71,11 +71,29 @@ class ProductController extends Controller
         $frequentSlugs = array_keys($frequentCategorySlugs);
         $suggestedCategories = collect();
         if (!empty($frequentSlugs)) {
-            $orderBy = implode(',', array_map(fn($s) => "'" . str_replace("'", "''", $s) . "'", $frequentSlugs));
-            $suggestedCategories = Category::whereIn('slug', $frequentSlugs)
-                ->orderByRaw("FIELD(slug, {$orderBy})")
-                ->take(5)
-                ->get();
+            $dbDriver = \DB::getDriverName();
+            
+            if ($dbDriver === 'pgsql') {
+                // PostgreSQL: Use CASE WHEN for custom ordering
+                $orderByCase = 'CASE slug ';
+                foreach ($frequentSlugs as $index => $slug) {
+                    $escapedSlug = str_replace("'", "''", $slug);
+                    $orderByCase .= "WHEN '{$escapedSlug}' THEN {$index} ";
+                }
+                $orderByCase .= 'END';
+                
+                $suggestedCategories = Category::whereIn('slug', $frequentSlugs)
+                    ->orderByRaw($orderByCase)
+                    ->take(5)
+                    ->get();
+            } else {
+                // MySQL/MariaDB: Use FIELD function
+                $orderBy = implode(',', array_map(fn($s) => "'" . str_replace("'", "''", $s) . "'", $frequentSlugs));
+                $suggestedCategories = Category::whereIn('slug', $frequentSlugs)
+                    ->orderByRaw("FIELD(slug, {$orderBy})")
+                    ->take(5)
+                    ->get();
+            }
         }
 
         return view('shop.index', compact('products', 'categories', 'search', 'categorySlug', 'suggestedCategories'));

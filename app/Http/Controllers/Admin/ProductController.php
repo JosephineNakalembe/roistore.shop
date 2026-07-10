@@ -358,9 +358,19 @@ class ProductController extends Controller
 
     private function generateNextProductId(): string
     {
-        $lastProduct = Product::where('product_id', 'like', 'ER%')
-            ->orderByRaw("CAST(SUBSTRING(product_id, 3) AS UNSIGNED) DESC")
-            ->first();
+        $dbDriver = \DB::getDriverName();
+        
+        if ($dbDriver === 'pgsql') {
+            // PostgreSQL syntax
+            $lastProduct = Product::where('product_id', 'like', 'ER%')
+                ->orderByRaw("CAST(SUBSTRING(product_id FROM 3) AS INTEGER) DESC")
+                ->first();
+        } else {
+            // MySQL/MariaDB syntax (default)
+            $lastProduct = Product::where('product_id', 'like', 'ER%')
+                ->orderByRaw("CAST(SUBSTRING(product_id, 3) AS UNSIGNED) DESC")
+                ->first();
+        }
 
         if ($lastProduct) {
             $lastNumber = (int) substr($lastProduct->product_id, 2);

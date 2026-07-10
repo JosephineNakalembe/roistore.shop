@@ -76,14 +76,16 @@
                 </div>
 
                 <!-- Subtotal & Checkout -->
-                <div style="margin-top:20px;padding:16px;background:#f9fafb;border-radius:14px;border:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-                    <div>
-                        <p class="text-muted" style="font-size:0.9rem;margin:0;">Subtotal ({{ $availableItems->filter(fn($i) => $i['selected'])->count() }} selected items)</p>
-                        <h2 style="margin:4px 0 0;">UGX{{ number_format($subtotal, 0) }}</h2>
+                <div style="margin-top:20px;padding:16px;background:#f9fafb;border-radius:14px;border:1px solid #e5e7eb;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <div>
+                            <p class="text-muted" style="font-size:0.9rem;margin:0;">Subtotal ({{ $availableItems->filter(fn($i) => $i['selected'])->count() }} selected items)</p>
+                            <h2 style="margin:4px 0 0;">UGX{{ number_format($subtotal, 0) }}</h2>
+                        </div>
                     </div>
-                    <div style="display:flex;gap:10px;">
-                        <a class="btn btn-secondary" href="{{ route('shop.index') }}">Continue Shopping</a>
-                        <a class="btn" href="{{ route('checkout.show') }}" style="{{ $subtotal > 0 ? '' : 'opacity:0.5;pointer-events:none;' }}">Checkout</a>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <a class="btn btn-secondary" href="{{ route('shop.index') }}" style="flex:1;min-width:140px;">Continue Shopping</a>
+                        <a class="btn" href="{{ route('checkout.show') }}" style="flex:1;min-width:140px;{{ $subtotal > 0 ? '' : 'opacity:0.5;pointer-events:none;' }}">Checkout</a>
                     </div>
                 </div>
             @endif

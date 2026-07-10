@@ -70,7 +70,6 @@
                     <p class="text-muted">{{ $product->category?->name ?? 'Uncategorized' }}</p>
                     <p id="productPrice" style="font-size:1.6rem;font-weight:700;">UGX{{ number_format($product->priceForColor($defaultColor), 0) }}</p>
                     <p>{{ $product->description }}</p>
-                    <p class="text-muted">Stock available: <strong>{{ $product->stock }}</strong></p>
 
                     @if($product->stock > 0 && $product->stock <= 2)
                         <p style="color:#dc2626;font-weight:600;margin-top:4px;font-size:0.9rem;">
@@ -93,8 +92,9 @@
                                                     class="color-pill"
                                                     data-color="{{ $color }}"
                                                     onclick="selectColor('{{ addslashes($color) }}')"
-                                                    style="cursor:pointer;border:2px solid #d1d5db;background:#fff;color:#111;border-radius:999px;padding:8px 18px;font-size:0.95rem;font-weight:600;white-space:nowrap;transition:all 0.15s;">
-                                                    {{ $color }}
+                                                    style="cursor:pointer;border:3px solid #d1d5db;background:#fff;color:#111;border-radius:50%;width:40px;height:40px;padding:0;font-size:0;font-weight:600;white-space:nowrap;transition:all 0.15s;box-shadow:0 2px 4px rgba(0,0,0,0.1);"
+                                                    title="{{ $color }}">
+                                                    <span style="display:block;width:100%;height:100%;border-radius:50%;background:{{ $color }};"></span>
                                                 </button>
                                             @endforeach
                                         </div>
@@ -465,13 +465,13 @@
             // Update pill styles
             document.querySelectorAll('.color-pill').forEach(btn => {
                 if (btn.dataset.color === color) {
-                    btn.style.background = '#111';
-                    btn.style.color = '#fff';
-                    btn.style.borderColor = '#111';
+                    btn.style.borderColor = '#1a1a2e';
+                    btn.style.transform = 'scale(1.15)';
+                    btn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
                 } else {
-                    btn.style.background = '#fff';
-                    btn.style.color = '#111';
                     btn.style.borderColor = '#d1d5db';
+                    btn.style.transform = 'scale(1)';
+                    btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
                 }
             });
 

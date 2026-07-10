@@ -8,12 +8,12 @@
 @media (max-width: 640px) {
     /* Container adjustments */
     .container {
-        padding: 8px 10px;
+        padding: 6px 8px;
     }
 
     /* Header & Navigation */
     header .container {
-        padding: 8px 10px;
+        padding: 6px 8px;
     }
 
     /* Header top section - logo and navbar on same line */
@@ -21,26 +21,27 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 6px;
+        gap: 4px;
         flex-wrap: nowrap !important;
-        padding: 8px 0;
+        padding: 4px 0;
     }
 
-    /* Logo - compact */
+    /* Logo - extremely compact on mobile */
     .logo {
-        font-size: 1rem !important;
+        font-size: 0.75rem !important;
         font-weight: 700;
         flex-shrink: 0;
         color: #111;
         text-decoration: none;
+        line-height: 1.2;
     }
 
-    /* Navbar - horizontal scroll */
+    /* Navbar - horizontal scroll, extremely compact on mobile */
     .navbar {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 4px;
+        gap: 1px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -55,18 +56,22 @@
     .navbar .nav-link {
         width: auto;
         justify-content: center;
-        padding: 6px 10px;
-        font-size: 0.75rem;
+        padding: 3px 5px;
+        font-size: 0.65rem;
         white-space: nowrap;
         flex-shrink: 0;
+        border-radius: 4px;
+        line-height: 1.2;
     }
 
     .navbar form button {
         width: auto;
         text-align: center;
-        padding: 6px 10px;
-        font-size: 0.75rem;
+        padding: 3px 5px;
+        font-size: 0.65rem;
         flex-shrink: 0;
+        border-radius: 4px;
+        line-height: 1.2;
     }
 
     /* Hide tagline on mobile */

@@ -124,11 +124,11 @@
         min-height: 44px;
     }
 
-    /* Product Grid - 1 column (single row per product) on mobile */
+    /* Product Grid - 2 columns on mobile */
     #productGrid,
     .product-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
     }
 
     /* Product Cards - compact */
@@ -494,10 +494,10 @@
         padding: 13px 14px !important;
     }
 
-    /* Product Grid */
+    /* Product Grid - 3 columns on tablet */
     #productGrid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-        gap: 16px !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 14px !important;
     }
 
     /* Product Detail - Stack on smaller tablets */
@@ -562,7 +562,8 @@
     }
 
     #productGrid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 16px !important;
     }
 
     /* Navigation */
@@ -592,7 +593,8 @@
     }
 
     #productGrid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
     }
 }
 
